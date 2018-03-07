@@ -19,6 +19,26 @@ scala> df = df.withColumn("Num", df("Num").cast(IntegerType))
 ```
 
 ## Requêtes
+* Afficher la liste des joueurs (limit 10)
+```scala
+scala> df.select("player").distinct().show(10)
++----------------+
+|          player|
++----------------+
+|        Ed Mikan|
+|       Red Rocha|
+|     John Barber|
+|      Al Bianchi|
+|  Reggie Harding|
+|       Bob Allen|
+|     Greg Howard|
+|Chuckie Williams|
+|  Nate Blackwell|
+|     Terry Mills|
++----------------+
+
+```
+
 * Moyenne d'age par franchise
 ```scala
 scala> df.select("tm", "age").groupBy("tm").avg("age").show()
@@ -38,7 +58,7 @@ scala> df.join(df2, Seq("Num"))
 
 ```
 
-df.select("player").show()
+
 
 //Filtre sur l'age et années différentes de 1990
 df.filter(df("age") > 23).filter(df("year") !== 1990).show()

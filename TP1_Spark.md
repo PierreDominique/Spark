@@ -36,7 +36,7 @@ scala> counts.show()
 ```
 
 |               value|count(1)|
---------------------|--------
+:--------------------|:--------:
 |                some|       1|
 |hadoop.security.l...|       1|
 |log4j.rootlogger=...|       1|
@@ -47,16 +47,7 @@ scala> counts.show()
 |                 two|       1|
 |             counter|       1|
 |log4j.appender.dr...|       1|
-|hdfs.audit.logger...|       1|
-|yarn.ewma.maxuniq...|       1|
-|log4j.appender.nm...|       1|
-|              daemon|       1|
-|log4j.category.se...|       1|
-|log4j.appender.js...|       1|
-|log4j.appender.dr...|       1|
-|        blockmanager|       1|
-|log4j.appender.js...|       1|
-|                 set|       4|
+
 
 ## Sauvegarde dans un fichier
 ```scala

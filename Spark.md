@@ -7,7 +7,10 @@ scala> var df = spark.read.option("header", "true").option("inferSchema", "true"
 
 ## Affichage du Schéma de la DataFrame
 ```scala
-scala> df.printSchema()
+scala> scala df.printSchema()
+```
+```scala
+ 
  
 |-- _c0: double (nullable = true)
 |-- Year: integer (nullable = true)

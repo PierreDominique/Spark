@@ -19,6 +19,7 @@ scala> scala df.printSchema()
 |-- GS: integer (nullable = true)
 |-- MP: integer (nullable = true)
 |-- PER: double (nullable = true)
+
 ...
 
 ```

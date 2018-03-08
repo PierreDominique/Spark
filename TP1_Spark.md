@@ -1,7 +1,7 @@
 # TP SPARK - WordCount
 
 
-### Définition de la variable d'environnement pour lancer Spark2__
+__Définition de la variable d'environnement pour lancer Spark2__
 ```
 $ export SPARK_MAJOR_VERSION=2
 $ cd /usr/hdp/current/spark2-client

@@ -1,14 +1,14 @@
 # TP SPARK - WordCount
 
 
-* Définition de la variable d'environnement pour lancer Spark2
+* __Définition de la variable d'environnement pour lancer Spark2__
 ```
 $ export SPARK_MAJOR_VERSION=2
 $ cd /usr/hdp/current/spark2-client
 $ ./bin/spark-shell
 ```
 
-* Lire la source et la convertire en DataSet
+* Lecture de la source et conversion en DataSet
 ```scala
 scala> val data = spark.read.textFile("/tmp/data.txt").as[String]
 org.apache.spark.sql.Dataset[String] = [value: string]

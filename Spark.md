@@ -19,7 +19,6 @@ scala> scala df.printSchema()
 |-- GS: integer (nullable = true)
 |-- MP: integer (nullable = true)
 |-- PER: double (nullable = true)
-
 ...
 
 ```
@@ -31,7 +30,6 @@ scala> df = df.withColumnRenamed("_c0","Num")
 |-- Num: double (nullable = true)
 
 ```
-
 
 ## Changer le type d'une colonne
 ```scala
@@ -84,6 +82,29 @@ scala> df.filter(df("tm").isNotNull).select($"tm".alias("Franchise"), $"age").gr
 
 ```
 
+* Joueurs de plus de 35 ans avec les meilleures stats
+```scala
+scala> df.filter(df("age") > 35).filter($"2p%" > 0.6 && $"2p%".notEqual(1)).select($"Player".alias("Joueur"),$"2p%").groupBy("Joueur").agg(substring(avg("2p%"),0,4).alias("% Panier 2pts")).sort(desc("% Panier 2pts")).show()
+
++-----------------+-------------+
+|           Joueur|% Panier 2pts|
++-----------------+-------------+
+|Wilt Chamberlain*|         0.72|
+|    Charles Jones|          0.7|
+|       Dale Ellis|         0.66|
+|      Dana Barros|         0.66|
+|        Bo Outlaw|         0.66|
+|     Andre Miller|         0.64|
+|Shaquille O'Neal*|         0.63|
+|    Nick Collison|         0.63|
+|   Artis Gilmore*|         0.61|
+|    Rasual Butler|         0.61|
+|   Chris Andersen|         0.60|
+|      Brent Barry|         0.60|
++-----------------+-------------+
+
+```
+
 * Requete SQL - Insight Hive : impact de l'age sur le pourcentage de panier à 2pts
 ```scala
 scala> df.createGlobalTempView("nba")
@@ -120,29 +141,6 @@ scala> spark.sql("SELECT age AS Age, substr(avg(`2p%`),0,5) AS Moyenne_2pt, subs
 | 43|       0.49|       null|          8.2|          12.4|
 | 44|      0.385|       null|          3.6|          11.2|
 +---+-----------+-----------+-------------+--------------+
-
-```
-
-* Joueurs de plus de 35 ans avec les meilleures stats
-```scala
-scala> df.filter(df("age") > 35).filter($"2p%" > 0.6 && $"2p%".notEqual(1)).select($"Player".alias("Joueur"),$"2p%").groupBy("Joueur").agg(substring(avg("2p%"),0,4).alias("% Panier 2pts")).sort(desc("% Panier 2pts")).show()
-
-+-----------------+-------------+
-|           Joueur|% Panier 2pts|
-+-----------------+-------------+
-|Wilt Chamberlain*|         0.72|
-|    Charles Jones|          0.7|
-|       Dale Ellis|         0.66|
-|      Dana Barros|         0.66|
-|        Bo Outlaw|         0.66|
-|     Andre Miller|         0.64|
-|Shaquille O'Neal*|         0.63|
-|    Nick Collison|         0.63|
-|   Artis Gilmore*|         0.61|
-|    Rasual Butler|         0.61|
-|   Chris Andersen|         0.60|
-|      Brent Barry|         0.60|
-+-----------------+-------------+
 
 ```
 

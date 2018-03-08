@@ -3,6 +3,7 @@
 
 ## Définition de la variable d'environnement pour lancer Spark2
 ```
+$ sudo su spark
 $ export SPARK_MAJOR_VERSION=2
 $ cd /usr/hdp/current/spark2-client
 $ ./bin/spark-shell
@@ -33,7 +34,7 @@ org.apache.spark.sql.Dataset[(String, Long)] = [value: string, count(1): bigint]
 ```scala
 scala> counts.show()
 
-+--------------------+--------+
+
 |               value|count(1)|
 +--------------------+--------+
 |                some|       1|
@@ -56,7 +57,7 @@ scala> counts.show()
 |        blockmanager|       1|
 |log4j.appender.js...|       1|
 |                 set|       4|
-+--------------------+--------+
+
 ```
 
 ## Sauvegarde dans un fichier

@@ -19,7 +19,7 @@ scala> val counts = groupedWords.count()
 org.apache.spark.sql.Dataset[(String, Long)] = [value: string, count(1): bigint]
 ```
 
-## Sauvegarde dans 1 fichier
+* Sauvegarde dans un fichier
 ```scala
 scala> counts.rdd.repartition(1).saveAsTextFile("/tmp/yolo2")
 ```

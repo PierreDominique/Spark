@@ -1,4 +1,4 @@
-# TP SPARK - WordCount
+# TP1 SPARK - WordCount
 
 
 ## Définition de la variable d'environnement pour lancer Spark2

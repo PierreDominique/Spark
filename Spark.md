@@ -8,8 +8,7 @@ scala> var df = spark.read.option("header", "true").option("inferSchema", "true"
 ## Affichage du Schéma de la DataFrame
 ```scala
 scala> scala df.printSchema()
-```
-```scala
+
 |-- _c0: double (nullable = true)
 |-- Year: integer (nullable = true)
 |-- Player: string (nullable = true)
@@ -46,6 +45,7 @@ scala> df = df.withColumn("Num", df("Num").cast(IntegerType))
 * Afficher la liste des joueurs (limit 10)
 ```scala
 scala> df.select($"player".alias("Joueur")).distinct().show(10)
+
 +----------------+
 |          Joueur|
 +----------------+

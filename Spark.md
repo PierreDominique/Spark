@@ -1,4 +1,4 @@
-# TP SPARK
+# TP SPARK - WordCount
 
 export SPARK_MAJOR_VERSION=2
 cd /usr/hdp/current/spark2-client

@@ -33,10 +33,10 @@ org.apache.spark.sql.Dataset[(String, Long)] = [value: string, count(1): bigint]
 ## Affichage du résultat
 ```scala
 scala> counts.show()
-
+```
 
 |               value|count(1)|
-+--------------------+--------+
+--------------------|--------
 |                some|       1|
 |hadoop.security.l...|       1|
 |log4j.rootlogger=...|       1|
@@ -57,8 +57,6 @@ scala> counts.show()
 |        blockmanager|       1|
 |log4j.appender.js...|       1|
 |                 set|       4|
-
-```
 
 ## Sauvegarde dans un fichier
 ```scala

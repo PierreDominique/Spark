@@ -31,7 +31,7 @@ org.apache.spark.sql.Dataset[(String, Long)] = [value: string, count(1): bigint]
 
 * __Affichage du résultat__
 ```scala
-scala>counts.show()
+scala> counts.show()
 
 +--------------------+--------+
 |               value|count(1)|

@@ -1,4 +1,4 @@
-# TP SPARK SQL - Data NBA
+# TP2 SPARK SQL - Data NBA
 
 ## Chargement du fichier csv
 ```scala

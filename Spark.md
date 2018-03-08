@@ -3,6 +3,24 @@
 ## Chargement du fichier csv
 ```scala
 scala> var df = spark.read.option("header", "true").option("inferSchema", "true").csv("/user/pdg/testhive/nba.csv")
+```
+
+## Affichage du Schéma de la DataFrame
+```scala
+scala> df.printSchema()
+ 
+|-- _c0: double (nullable = true)
+|-- Year: integer (nullable = true)
+|-- Player: string (nullable = true)
+|-- Pos: string (nullable = true)
+|-- Age: integer (nullable = true)
+|-- Tm: string (nullable = true)
+|-- G: integer (nullable = true)
+|-- GS: integer (nullable = true)
+|-- MP: integer (nullable = true)
+|-- PER: double (nullable = true)
+
+...
 
 ```
 
@@ -10,20 +28,25 @@ scala> var df = spark.read.option("header", "true").option("inferSchema", "true"
 ```scala
 scala> df = df.withColumnRenamed("_c0","Num")
 
+|-- Num: double (nullable = true)
+
 ```
+
 
 ## Changer le type d'une colonne
 ```scala
 scala> df = df.withColumn("Num", df("Num").cast(IntegerType))
+
+|-- Num: integer (nullable = true)
 
 ```
 
 ## Requêtes
 * Afficher la liste des joueurs (limit 10)
 ```scala
-scala> df.select("player").distinct().show(10)
+scala> df.select($"player".alias("Joueur")).distinct().show(10)
 +----------------+
-|          player|
+|          Joueur|
 +----------------+
 |        Ed Mikan|
 |       Red Rocha|
@@ -41,7 +64,22 @@ scala> df.select("player").distinct().show(10)
 
 * Moyenne d'age par franchise
 ```scala
-scala> df.select("tm", "age").groupBy("tm").avg("age").show()
+scala> df.filter(df("tm").isNotNull).select($"tm".alias("Franchise"), $"age").groupBy("Franchise").agg(substring(avg("age"),0,5).alias("Moyenne d'age")).sort(asc("Moyenne d'age")).show(10)
+
++---------+-------------+
+|Franchise|Moyenne d'age|
++---------+-------------+
+|      CHS|        24.30|
+|      CHP|         25.0|
+|      DNN|        25.06|
+|      INO|        25.21|
+|      CHZ|        25.23|
+|      SDR|        25.27|
+|      MNL|        25.46|
+|      STB|        25.57|
+|      KCK|        25.68|
+|      CIN|        25.70|
++---------+-------------+
 
 ```
 

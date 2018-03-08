@@ -10,8 +10,6 @@ scala> var df = spark.read.option("header", "true").option("inferSchema", "true"
 scala> scala df.printSchema()
 ```
 ```scala
- 
- 
 |-- _c0: double (nullable = true)
 |-- Year: integer (nullable = true)
 |-- Player: string (nullable = true)

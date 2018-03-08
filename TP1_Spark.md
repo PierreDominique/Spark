@@ -1,20 +1,20 @@
 # TP SPARK - WordCount
 
 
-__Définition de la variable d'environnement pour lancer Spark2__
+## Définition de la variable d'environnement pour lancer Spark2
 ```
 $ export SPARK_MAJOR_VERSION=2
 $ cd /usr/hdp/current/spark2-client
 $ ./bin/spark-shell
 ```
 
-__Lecture de la source et conversion en DataSet__
+## Lecture de la source et conversion en DataSet
 ```scala
 scala> val data = spark.read.textFile("/tmp/data.txt").as[String]
 org.apache.spark.sql.Dataset[String] = [value: string]
 ```
 
-__Séparation et regroupement des mots__
+## Séparation et regroupement des mots
 ```scala
 scala> val words = data.flatMap(value => value.split("\\s+"))
 org.apache.spark.sql.Dataset[String] = [value: string]
@@ -23,13 +23,13 @@ scala> val groupedWords = words.groupByKey(_.toLowerCase)
 org.apache.spark.sql.KeyValueGroupedDataset[String,String] = org.apache.spark.sql.KeyValueGroupedDataset@a175266
 ```
 
-__Comptage des mots__
+## Comptage des mots
 ```scala
 scala> val counts = groupedWords.count()
 org.apache.spark.sql.Dataset[(String, Long)] = [value: string, count(1): bigint]
 ```
 
-__Affichage du résultat__
+## Affichage du résultat
 ```scala
 scala> counts.show()
 
@@ -59,7 +59,7 @@ scala> counts.show()
 +--------------------+--------+
 ```
 
-__Sauvegarde dans un fichier__
+## Sauvegarde dans un fichier
 ```scala
 scala> counts.rdd.repartition(1).saveAsTextFile("/tmp/yolo2")
 ```

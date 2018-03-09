@@ -1,6 +1,10 @@
 # TP3 SPARK Streaming - Twitter Hashtag Count
 
-## 
+Using Twitter Streaming is a great way to learn Spark Streaming if you don't have your streaming datasource and want a great rich input dataset to try Spark Streaming transformations on.
+
+In this example, we show how to calculate the top hashtags seen in the last X window of time every Y time unit.
+
+
 ```scala
 import org.apache.spark._
 import org.apache.spark.storage._

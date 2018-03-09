@@ -1,4 +1,4 @@
-# TP3 SPARK Streaming - Twitter
+# TP3 SPARK Streaming - Twitter Hashtag Count
 
 ## 
 ```scala
@@ -13,7 +13,10 @@ import twitter4j.auth.OAuthAuthorization
 import twitter4j.conf.ConfigurationBuilder
 ```
 
-## 
+## Step 1: Enter your Twitter API Credentials.
+* Go to https://apps.twitter.com and look up your Twitter API Credentials, or create an app to create them.
+* Enter your credentials into the cell below
+
 ```scala
 System.setProperty("twitter4j.oauth.consumerKey", "CONSUMER_API_KEY")
 System.setProperty("twitter4j.oauth.consumerSecret", "CONSUMER_API_SECRET")
@@ -21,7 +24,10 @@ System.setProperty("twitter4j.oauth.accessToken", "ACCESS_TOKEN")
 System.setProperty("twitter4j.oauth.accessTokenSecret", "ACCESS_TOKEN_SECRET")
 ```
 
-## 
+## Step 2: Configure where to output the top hashtags and how often to compute them.
+* Run the below cell to configure output directory and computation frequency
+* Feel free to adjust these and experiment with different values
+
 ```scala
 // Directory to output top hashtags
 val outputDirectory = "/twitter"
@@ -36,12 +42,15 @@ val windowLength = new Duration(5 * 1000)
 val timeoutJobLength = 100 * 1000
 ```
 
-## 
+## Step 3: Run the Twitter Streaming job.
+* Clean up any old files.
+
 ```scala
 dbutils.fs.rm(outputDirectory, true)
 ```
 
-## 
+* Create the function to that creates the Streaming Context and sets up the streaming job.
+
 ```scala
 var newContextCreated = false
 var num = 0
@@ -81,26 +90,33 @@ def creatingFunc(): StreamingContext = {
 }
 ```
 
-## 
+* Create the StreamingContext using getActiveOrCreate, as required when starting a streaming job in Databricks.
+ 
 ```scala
 @transient val ssc = StreamingContext.getActiveOrCreate(creatingFunc)
 
 ```
 
-## 
+* Start the Spark Streaming Context and return when the Streaming job exits or return with the specified timeout.
+
 ```scala
 ssc.start()
 ssc.awaitTerminationOrTimeout(timeoutJobLength)
 ```
 
-## 
+* Stop any active Streaming Contexts, but don't stop the spark contexts they are attached to.
+ 
 ```scala
 StreamingContext.getActive.foreach { _.stop(stopSparkContext = false) }
 
 ```
 
-## 
+## Step 4: View the Results.
+
 ```scala
 display(dbutils.fs.ls(outputDirectory))
+```
+
+```scala
 dbutils.fs.head(s"${outputDirectory}/top_hashtags_3")
 ```

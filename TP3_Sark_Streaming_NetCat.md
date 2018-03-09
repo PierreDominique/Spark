@@ -7,7 +7,7 @@ import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._ // pas necessaire depuis Spark 1.3
 
 // Création d'un StreamContext local avec deux thread et batch d'interval 1s
-// Le master a besoin de 2 cores pour prévenir de l'effet de starvation.
+// Le master a besoin de 2 cores pour prévenir de l'effet de famine.
 
 scala> val conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount")
 scala> val ssc = new StreamingContext(conf, Seconds(1))

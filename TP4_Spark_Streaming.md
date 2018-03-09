@@ -1,4 +1,4 @@
-# TP3 SPARK Streaming - Twitter Hashtag Count
+# TP4 SPARK Streaming - Twitter Hashtag Count
 
 Using Twitter Streaming is a great way to learn Spark Streaming if you don't have your streaming datasource and want a great rich input dataset to try Spark Streaming transformations on.
 
